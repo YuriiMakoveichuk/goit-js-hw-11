@@ -1,26 +1,29 @@
-(function(){const s=document.createElement("link").relList;if(s&&s.supports&&s.supports("modulepreload"))return;for(const e of document.querySelectorAll('link[rel="modulepreload"]'))c(e);new MutationObserver(e=>{for(const t of e)if(t.type==="childList")for(const o of t.addedNodes)o.tagName==="LINK"&&o.rel==="modulepreload"&&c(o)}).observe(document,{childList:!0,subtree:!0});function i(e){const t={};return e.integrity&&(t.integrity=e.integrity),e.referrerPolicy&&(t.referrerPolicy=e.referrerPolicy),e.crossOrigin==="use-credentials"?t.credentials="include":e.crossOrigin==="anonymous"?t.credentials="omit":t.credentials="same-origin",t}function c(e){if(e.ep)return;e.ep=!0;const t=i(e);fetch(e.href,t)}})();function n(r){const s="https://pixabay.com",i="/api/",c=new URLSearchParams({key:"44363608-aeb5e859d1804b8d255aa00c3",g:r,image_type:"photo"}),e=`${s}${i}?${c}`;return fetch(e).then(t=>t.json())}function a(r){return r.map(u).join(`
-`)}function u({webformatURL:r,tags:s,likes:i,views:c,comments:e,downloads:t}){return` <li class="album-item">
+import{i as u,S as m}from"./assets/vendor-8c59ed88.js";(function(){const s=document.createElement("link").relList;if(s&&s.supports&&s.supports("modulepreload"))return;for(const e of document.querySelectorAll('link[rel="modulepreload"]'))o(e);new MutationObserver(e=>{for(const t of e)if(t.type==="childList")for(const a of t.addedNodes)a.tagName==="LINK"&&a.rel==="modulepreload"&&o(a)}).observe(document,{childList:!0,subtree:!0});function i(e){const t={};return e.integrity&&(t.integrity=e.integrity),e.referrerPolicy&&(t.referrerPolicy=e.referrerPolicy),e.crossOrigin==="use-credentials"?t.credentials="include":e.crossOrigin==="anonymous"?t.credentials="omit":t.credentials="same-origin",t}function o(e){if(e.ep)return;e.ep=!0;const t=i(e);fetch(e.href,t)}})();function p(r){const s="https://pixabay.com",i="/api/",o=new URLSearchParams({key:"44363608-aeb5e859d1804b8d255aa00c3",q:`${r}`,image_type:"photo",orientation:"horizontal",safesearch:!0}),e=`${s}${i}?${o}`;return fetch(e).then(t=>t.json())}function d({webformatURL:r,largeImageURL:s,tags:i,likes:o,views:e,comments:t,downloads:a}){return` <li class="album-item">
+            <a class="album-link" href="${s}">
             <img
-              class='${r}'
-              alt="${s}"
+              class="album-img"
+              src="${r}"
+              alt="${i}"
             />
             <ul class="statistics-list">
               <li class="statistics-item text-marg-1">
                 <p class="statistics-text">Likes</p>
-                <p>${i}</p>
+                <p>${o}</p>
               </li>
               <li class="statistics-item text-marg-2">
                 <p class="statistics-text">Views</p>
-                <p>${c}</p>
+                <p>${e}</p>
               </li>
               <li class="statistics-item text-marg-3">
                 <p class="statistics-text">Comments</p>
-                <p>${e}</p>
+                <p>${t}</p>
               </li>
               <li class="statistics-item">
                 <p class="statistics-text">Downloads</p>
-                <p>${t}</p>
+                <p>${a}</p>
               </li>
             </ul>
-          </li>`}const l=document.querySelector(".js-form"),p=document.querySelector(".album-list");l.addEventListener("submit",r=>{r.preventDefault();const s=r.target.elements.query.value;s!==""&&n(s).then(i=>{console.log(i);const c=a(i);p.innerHTML=c}).catch(i=>{}),l.reset()});
+            </a>
+          </li>`}function f(r){return r.map(d).join(`
+`)}const l=document.querySelector(".js-form"),c=document.querySelector(".js-album-list"),n=document.querySelector(".js-loader");l.addEventListener("submit",r=>{r.preventDefault();const s=r.target.elements.text.value.trim();s!==""&&(h(),p(s).then(i=>{i.hits.length===0?(c.innerHTML="",u.error({message:"Sorry, there are no images matching your search query. Please try again!",position:"topRight",timeout:2e3})):(c.innerHTML=f(i.hits),new m(".album-list a",{captionsData:"alt",captionDelay:250}).refresh())}).catch(i=>{console.log(i)}).finally(()=>{g()})),l.reset()});function h(){n.classList.remove("hidden")}function g(){n.classList.add("hidden")}
 //# sourceMappingURL=commonHelpers.js.map
