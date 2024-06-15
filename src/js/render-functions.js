@@ -1,9 +1,6 @@
-export function galleriesTemplate(arr) {
-  return arr.map(galleryTemplate).join('\n');
-}
-
 function galleryTemplate({
   webformatURL,
+  largeImageURL,
   tags,
   likes,
   views,
@@ -11,8 +8,10 @@ function galleryTemplate({
   downloads,
 }) {
   return ` <li class="album-item">
+            <a class="album-link" href="${largeImageURL}">
             <img
-              class='${webformatURL}'
+              class="album-img"
+              src="${webformatURL}"
               alt="${tags}"
             />
             <ul class="statistics-list">
@@ -33,7 +32,9 @@ function galleryTemplate({
                 <p>${downloads}</p>
               </li>
             </ul>
+            </a>
           </li>`;
 }
-
-// const template = galleryTemplate([0]);
+export function galleriesTemplate(arr) {
+  return arr.map(galleryTemplate).join('\n');
+}
