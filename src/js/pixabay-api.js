@@ -9,5 +9,9 @@ export function userRequest(userSearch) {
     safesearch: true,
   });
   const url = `${BASE_URL}${END_POINT}?${param}`;
-  return fetch(url).then(res => res.json());
+  return fetch(url)
+    .then(res => res.json())
+    .catch(err => {
+      console.log(err);
+    });
 }

@@ -9,16 +9,20 @@ import 'simplelightbox/dist/simple-lightbox.min.css';
 const searchForm = document.querySelector('.js-form');
 const ulElem = document.querySelector('.js-album-list');
 const loader = document.querySelector('.js-loader');
+const album = new SimpleLightbox('.album-list a', {
+  captionsData: 'alt',
+  captionDelay: 250,
+});
 
 const request = searchForm.addEventListener('submit', e => {
   e.preventDefault();
+  ulElem.innerHTML = '';
   const userSearch = e.target.elements.text.value.trim();
   if (userSearch !== '') {
     showLoader();
     userRequest(userSearch)
       .then(data => {
         if (data.hits.length === 0) {
-          ulElem.innerHTML = '';
           iziToast.error({
             message:
               'Sorry, there are no images matching your search query. Please try again!',
@@ -27,10 +31,7 @@ const request = searchForm.addEventListener('submit', e => {
           });
         } else {
           ulElem.innerHTML = galleriesTemplate(data.hits);
-          const album = new SimpleLightbox('.album-list a', {
-            captionsData: 'alt',
-            captionDelay: 250,
-          }).refresh();
+          album.refresh();
         }
       })
       .catch(err => {
